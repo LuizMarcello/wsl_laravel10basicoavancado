@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProdutosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
+});
+
+/* Prefixo "produtos" */
+/* http://localhost:8989/produtos */
+Route::prefix('produtos')->group(function () {
+    Route::get('/', [ProdutosController::class, 'index'])->name('produto.index');
+    /* http://localhost:8989/produtos/adicionar */
+    /* Route::get('/adicionar', [ProdutosController::class, 'index'])->name('produto.index'); */
 });
