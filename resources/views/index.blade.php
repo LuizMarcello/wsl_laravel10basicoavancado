@@ -107,7 +107,7 @@
                     <h1 class="h2">Dashboard</h1>
                 </div>
 
-                {{-- <h2>Section title</h2>
+            <!-- <h2>Section title</h2>
                 <div class="table-responsive">
                     <table class="table table-striped table-sm">
                         <thead>
@@ -233,7 +233,7 @@
                                 <td>text</td>
                             </tr>
                         </tbody>
-                    </table> --}}
+                    </table>  -->
                 </div>
             </main>
         </div>
