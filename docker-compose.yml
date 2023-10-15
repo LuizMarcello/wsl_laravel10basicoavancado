@@ -11,7 +11,7 @@ services:
         volumes:
             - ./:/var/www
         networks:
-            - sistema-getao-network
+            - sistema-gestao-network
     # nginx
     nginx:
         container_name: servidor-nginx
@@ -23,7 +23,7 @@ services:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
         networks:
-            - sistema-getao-network
+            - sistema-gestao-network
      # db mysql ${DB_DATABASE} //Busca do arquivo .env
     mysql:
         container_name: banco-mysql
@@ -39,7 +39,7 @@ services:
         ports:
             - "3388:3306"
         networks:
-            - sistema-getao-network
+            - sistema-gestao-network
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
@@ -52,10 +52,10 @@ services:
         ports:
             - 8899:80
         networks:
-            - sistema-getao-network
+            - sistema-gestao-network
 
 networks:
-    sistema-getao-network:
+    sistema-gestao-network:
         driver: bridge
 
 #Doc. de utilizacao
