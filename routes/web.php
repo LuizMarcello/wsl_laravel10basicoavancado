@@ -19,9 +19,13 @@ Route::get('/', function () {
 });
 
 /* Prefixo "produtos" */
-/* http://localhost:8989/produtos */
 Route::prefix('produtos')->group(function () {
+    /* http://localhost:8989/produtos */
     Route::get('/', [ProdutosController::class, 'index'])->name('produto.index');
+
     /* http://localhost:8989/produtos/adicionar */
-    /* Route::get('/adicionar', [ProdutosController::class, 'index'])->name('produto.index'); */
+    //Route::get('/adicionar', [ProdutosController::class, 'index'])->name('produto.index'); */
+
+    /* http://localhost:8989/produtos/delete */
+    Route::delete('/delete', [ProdutosController::class, 'delete'])->name('produto.delete');
 });
