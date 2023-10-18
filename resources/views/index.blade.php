@@ -117,14 +117,10 @@
 
     {{-- BlocUI loading --}}
     {{-- Mensagem enquanto o registro está sendo deletado --}}
-    <script>
-        "https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
 
-
-
-
-
+    {{-- Estrutura ajax(JQuery) --}}
+    <script src="/js/projeto.js"></script>
 
 </body>
 
