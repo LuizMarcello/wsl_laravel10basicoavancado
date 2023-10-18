@@ -38,6 +38,9 @@
                                     <a href="" class="btn btn-light btn-sm">
                                         Editar
                                     </a>
+
+                                    {{-- Este "meta", é para enviar um token da sessão (Laravel com ajax) --}}
+                                    <meta name='csrf-token' content="{{ csrf_token() }}" />
                                     {{-- Dispara esta função que está no "projeto.js" --}}
                                     {{-- Ela espera os parâmetros: rotaUrl e idDoRegistro  --}}
                                     <a onclick="deleteRegistroPaginacao('{{ route('produto.delete') }}',  {{ $produto->id }} )"

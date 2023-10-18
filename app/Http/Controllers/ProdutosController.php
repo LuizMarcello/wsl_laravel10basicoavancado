@@ -30,8 +30,11 @@ class ProdutosController extends Controller
         //return 'produtosss';
     }
 
-    public function delete(Request $requeste)
+    public function delete(Request $request)
     {
-
+        $id = $request->id;
+        $buscaRegistro = Produto::find($id);
+        $buscaRegistro->delete();
+        return response()->json(['success' => true]);
     }
 }

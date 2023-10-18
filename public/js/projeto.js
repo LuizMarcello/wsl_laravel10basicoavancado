@@ -6,24 +6,34 @@ function deleteRegistroPaginacao(rotaUrl, idDoRegistro) {
         $.ajax({
             url: rotaUrl,
             method: 'DELETE',
-            headers: {},
+            /* Para trabalhar laravel com ajax, é necessário
+               ter um token de sessão, para o laravel poder autorizar
+               requisição externa com ajax. O "meta" de paginacao.blade.php
+               (excluir), está enviando este tokem */
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             data: {
                 id: idDoRegistro,
             },
             beforeSend: function () {
                 $.blockUI({
                     message: 'Carregando...',
-                    timeout: 2000,
+                    timeout: 3000,
                 });
             },
             /* Ajax: Caso de sucesso */
         }).done(function (data) {
             $.unblockUI();
-            console.log(data);
+            if (data.success == true) {
+                /* Atualizar a página */
+                window.location.reload();
+            } else {
+                alert('Não foi possível excluir!');
+            }
+            //console.log(data);
             /* Ajax: Caso de não sucesso */
         }).fail(function (data) {
             $.unblockUI();
-            alert('Não foi possíverl buscar os dados');
+            alert('Não foi possível buscar os dados!');
         });
 
     }
