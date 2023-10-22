@@ -37,4 +37,22 @@ class ProdutosController extends Controller
         $buscaRegistro->delete();
         return response()->json(['success' => true]);
     }
+
+    public function cadastrarProduto(Request $request)
+    {
+        /* Existem duas rotas iguais no web.php, uma "get" e outra "post" */
+        /* Condicional para verificar se é "post" ou "get" */
+        /* "method()" é do navegador */
+        if ($request->method() == 'POST') {
+            // cria os dados
+            $data = $request->all();
+            Produto::create($data);
+
+            return redirect()->route('produto.index');
+        }
+        /* O depurador já entende que aqui é como se fosse 
+           o "else()" do if() acima */
+        /* Como aqui é o verbo "get", então retorna uma view */
+        return view('pages.produtos.create');
+    }
 }
