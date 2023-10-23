@@ -15,11 +15,19 @@
         {{-- Mesmo nome das colunas no bd --}}
         <div class="mb-3">
             <label class="form-label">Nome</label>
-            <input type="text" class="form-control" name="nome">
+            <input type="text" class="form-control 
+             @error('nome') is-invalid @enderror" name="nome">
+            @if ($errors->has('nome'))
+                <div class="invalid-feedback">{{ $errors->first('nome') }}</div>
+            @endif
         </div>
         <div class="mb-3">
             <label class="form-label">Valor</label>
-            <input class="form-control" name="valor">
+            <input class="form-control 
+             @error('valor') is-invalid @enderror" name="valor">
+            @if ($errors->has('valor'))
+                <div class="invalid-feedback">{{ $errors->first('valor') }}</div>
+            @endif
         </div>
         <button type="submit" class="btn btn-success">Cadastrar</button>
     </form>
