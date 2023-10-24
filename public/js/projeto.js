@@ -38,3 +38,7 @@ function deleteRegistroPaginacao(rotaUrl, idDoRegistro) {
 
     }
 }
+
+/* RobinHerbots */
+/* InputMask */
+$('#mascara_valor').mask('#.##0,00', { reverse: true })
