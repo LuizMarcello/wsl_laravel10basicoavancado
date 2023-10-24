@@ -61,4 +61,30 @@ class ProdutosController extends Controller
         /* Como aqui é o verbo "get", então retorna uma view */
         return view('pages.produtos.create');
     }
+
+    public function atualizarProduto(FormRequestProduto $request, $id)
+    {
+        /* Existem duas rotas iguais no web.php, uma "get" e outra "post" */
+        /* Condicional para verificar se é "post" ou "get" */
+        /* "method()" é do navegador */
+        if ($request->method() == 'PUT') {
+            /* Atualiza os dados */
+            $data = $request->all();
+            /* Model "Componentes" */
+            /* Função para converter "ponto/virgula"  */
+            $componentes = new Componentes();
+            $data['valor'] = $componentes->formatacaoMascaraDinheiroDecimal($data['valor']);
+            $buscaRegistro = Produto::find($id);
+            $buscaRegistro->update($data);
+            return redirect()->route('produto.index');
+        }
+        /* O depurador já entende que aqui é como se fosse 
+           o "else()" do if() acima */
+        /* Como aqui é o verbo "get", então retorna uma view */
+        /* Eloquent ORM: Quando achar o produto com o "id" igual
+           ao "id" passado como parâmetro, pega ele pra mim */
+        $findProduto = Produto::where('id', '=', $id)->first();
+        /* Esta variável estará acessivel na view "atualiza" */
+        return view('pages.produtos.atualiza', compact('findProduto'));
+    }
 }
