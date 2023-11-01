@@ -9,7 +9,7 @@ class Componentes extends Model
 {
     use HasFactory;
 
-    /* Função para transformar a virgula inserido no formulário de crete */
+    /* Função para transformar a virgula inserido no formulário de create */
     public function formatacaoMascaraDinheiroDecimal($valorParaFormatar)
     {
         $tamanho = strlen($valorParaFormatar);
