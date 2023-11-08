@@ -51,7 +51,7 @@ Route::prefix('produtos')->group(function () {
 /* Prefixo "clientes" */
 Route::prefix('clientes')->group(function () {
     /* http://localhost:8989/clientes */
-    Route::get('/', [ClientesController::class, 'index'])->name('cliente.index');
+    Route::get('/', [ClientesController::class, 'index'])->name('clientes.index');
 
     /* ==Cadastrar create== */
     /* get: Apresentar o formulário para cadastrar dados */

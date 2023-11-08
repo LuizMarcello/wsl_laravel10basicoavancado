@@ -17,4 +17,21 @@ class Cliente extends Model
         "cep",
         "bairro"
     ];
+
+    public function getClientesPesquisarIndex(string $search = '')
+    {
+        /* Como já estamos dentro do model "Cliente", este "$this" por
+           si só, já representa este model. */
+        $clientes = $this->where(function ($query) use ($search) {
+            /* Condicional, se "$search" existir, não for uma string
+               vazia, daí faz a consulta ao banco de dados. */
+            if ($search) {
+                $query->where('nome', $search);
+                /* O "like" quer dizer, parece com... */
+                $query->orWhere('nome', 'LIKE', "%{$search}%");
+            }
+        })->get();
+
+        return $clientes;
+    }
 }
