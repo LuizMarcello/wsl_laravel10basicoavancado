@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FormRequestCliente;
+use App\Http\Requests\FormRequestClientes;
 use App\Models\Cliente;
 use App\Models\Componentes;
 use Brian2694\Toastr\Facades\Toastr;
@@ -30,7 +30,6 @@ class ClientesController extends Controller
 
         /* compact(): Permite que seja acessada a variável na wiew */
         return view('pages.clientes.paginacao', compact('findCliente'));
-        //return 'clientesss';
     }
 
     public function delete(Request $request)
@@ -41,7 +40,7 @@ class ClientesController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function cadastrarCliente(FormRequestCliente $request)
+    public function cadastrarCliente(FormRequestClientes $request)
     {
         /* Existem duas rotas iguais no web.php, uma "get" e outra "post" */
         /* Condicional para verificar se é "post" ou "get" */
@@ -49,15 +48,12 @@ class ClientesController extends Controller
         if ($request->method() == 'POST') {
             // cria os dados
             $data = $request->all();
+            // dd($data);
             /* Model "Componentes" */
             /* Função para converter "ponto/virgula"  */
-            $componentes = new Componentes();
-            $data['valor'] = $componentes->formatacaoMascaraDinheiroDecimal($data['valor']);
             Cliente::create($data);
-
             Toastr::success('Gravado com sucesso');
-
-            return redirect()->route('cliente.index');
+            return redirect()->route('clientes.index');
         }
         /* O depurador já entende que aqui é como se fosse 
            o "else()" do if() acima */
@@ -65,7 +61,7 @@ class ClientesController extends Controller
         return view('pages.clientes.create');
     }
 
-    public function atualizarCliente(FormRequestCliente $request, $id)
+    public function atualizarCliente(FormRequestClientes $request, $id)
     {
         /* Existem duas rotas iguais no web.php, uma "get" e outra "post" */
         /* Condicional para verificar se é "post" ou "get" */
@@ -73,13 +69,10 @@ class ClientesController extends Controller
         if ($request->method() == 'PUT') {
             /* Atualiza os dados */
             $data = $request->all();
-            /* Model "Componentes" */
-            /* Função para converter "ponto/virgula"  */
-            $componentes = new Componentes();
-            $data['valor'] = $componentes->formatacaoMascaraDinheiroDecimal($data['valor']);
             $buscaRegistro = Cliente::find($id);
             $buscaRegistro->update($data);
-            return redirect()->route('cliente.index');
+            Toastr::success('Atualizado com sucesso');
+            return redirect()->route('clientes.index');
         }
         /* O depurador já entende que aqui é como se fosse 
            o "else()" do if() acima */

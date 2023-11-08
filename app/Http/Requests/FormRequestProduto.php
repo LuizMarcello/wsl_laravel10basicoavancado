@@ -31,7 +31,5 @@ class FormRequestProduto extends FormRequest
         }
         /* Se for "GET" retorna string vazia, e não valida nada */
         return $request;
-
-
     }
 }
