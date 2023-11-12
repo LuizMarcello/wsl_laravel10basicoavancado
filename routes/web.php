@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\VendasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,4 +75,17 @@ Route::prefix('clientes')->group(function () {
 
     /* http://localhost:8989/clientes/delete */
     Route::delete('/delete', [ClientesController::class, 'delete'])->name('cliente.delete');
+});
+
+/* Prefixo "vendas" */
+Route::prefix('vendas')->group(function () {
+    /* http://localhost:8989/vendas */
+    Route::get('/', [VendasController::class, 'index'])->name('vendas.index');
+
+    /* ==Cadastrar create== */
+    /* get: Apresentar o formulário para cadastrar dados */
+    /* http://localhost:8989/vendas/cadastrarCliente */
+    Route::get('/cadastrarVenda', [VendasController::class, 'cadastrarVenda'])->name('cadastrar.venda');
+    /* post: Cadastrar os dados no bando de dados */
+    Route::post('/cadastrarVenda', [VendasController::class, 'cadastrarVenda'])->name('cadastrar.venda');
 });
