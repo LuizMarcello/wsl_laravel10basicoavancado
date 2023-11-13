@@ -28,6 +28,7 @@
                             <th>Numeração</th>
                             <th>Produto</th>
                             <th>Cliente</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,6 +37,12 @@
                                 <td>{{ $venda->numero_da_venda }}</td>
                                 <td>{{ $venda->produto->nome }}</td>
                                 <td>{{ $venda->cliente->nome }}</td>
+                                <td>
+                                    {{-- Assim, vai enviar um "get", será para a rota "get" --}}
+                                    <a href="" class="btn btn-light btn-sm">
+                                        Enviar email
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

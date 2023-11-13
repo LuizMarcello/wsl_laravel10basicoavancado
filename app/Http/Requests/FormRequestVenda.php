@@ -11,18 +11,20 @@ class FormRequestVenda extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $request = [];
+        /* Se for "POST" entra aqui */
+        if ($this->method() == "POST" || $this->method() == 'PUT') {
+            $request = [
+                'produto_id' => 'required',
+                'cliente_id' => 'required',
+            ];
+        }
+        /* Se for "GET" retorna string vazia, e não valida nada */
+        return $request;
     }
 }
