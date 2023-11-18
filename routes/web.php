@@ -86,6 +86,10 @@ Route::prefix('vendas')->group(function () {
     /* get: Apresentar o formulário para cadastrar dados */
     /* http://localhost:8989/vendas/cadastrarCliente */
     Route::get('/cadastrarVenda', [VendasController::class, 'cadastrarVenda'])->name('cadastrar.venda');
+
     /* post: Cadastrar os dados no bando de dados */
     Route::post('/cadastrarVenda', [VendasController::class, 'cadastrarVenda'])->name('cadastrar.venda');
+
+    /* http://localhost:8989/vendas/enviaComprovantePorEmail/id */
+    Route::get('/enviaComprovantePorEmail/{id}', [VendasController::class, 'enviaComprovantePorEmail'])->name('enviaComprovantePorEmail.venda');
 });

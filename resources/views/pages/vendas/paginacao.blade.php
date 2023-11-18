@@ -39,7 +39,8 @@
                                 <td>{{ $venda->cliente->nome }}</td>
                                 <td>
                                     {{-- Assim, vai enviar um "get", será para a rota "get" --}}
-                                    <a href="" class="btn btn-light btn-sm">
+                                    <a href="{{ route('enviaComprovantePorEmail.venda', $venda->id) }}"
+                                        class="btn btn-light btn-sm">
                                         Enviar email
                                     </a>
                                 </td>

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FormRequestVenda;
+use App\Mail\ComprovanteDeVendaEmail;
 use App\Models\Venda;
 use App\Models\Produto;
 use App\Models\Cliente;
-use App\Models\Componentes;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class VendasController extends Controller
 {
@@ -49,11 +50,9 @@ class VendasController extends Controller
             $data = $request->all();
             $data['numero_da_venda'] = $findNumeracao;
             //dd($data);
-            
+
             Venda::create($data);
-
             Toastr::success('Gravado com sucesso');
-
             return redirect()->route('vendas.index');
         }
 
@@ -63,4 +62,35 @@ class VendasController extends Controller
         /* "compact()": Enviando para a view retornada */
         return view('pages.vendas.create', compact('findNumeracao', 'findProduto', 'findCliente'));
     }
+
+    public function enviaComprovantePorEmail($id)
+    {
+        /* Pega todos os dados do 1º registro que possui o "id" igual ao "id" passado no parâmetro */
+        /* ORM Eloquent */
+        $buscaVenda = Venda::where('id', '=', $id)->first();
+
+        /* Buscando do relacionamento com produtos */
+        /* "produto()": Função no model Venda.php */
+        $produtoNome = $buscaVenda->produto->nome;
+
+        /* Buscando do relacionamento com clientes */
+        /* "cliente()": Função no model Venda.php */
+        $clienteEmail = $buscaVenda->cliente->email;
+
+        /* Buscando do relacionamento com clientes */
+        /* "cliente()": Função no model Venda.php */
+        $clienteNome = $buscaVenda->cliente->nome;
+        //dd($clienteEmail);
+
+        $sendMailData = [
+            'produtoNome' => $produtoNome,
+            'clienteNome' => $clienteNome,
+        ];
+
+        Mail::to($clienteEmail)->send(new ComprovanteDeVendaEmail($sendMailData));
+
+        Toastr::success('Email enviado com sucesso');
+        return redirect()->route('vendas.index');
+    }
 }
+
