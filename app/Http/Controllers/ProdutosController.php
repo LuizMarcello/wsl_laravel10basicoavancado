@@ -79,6 +79,8 @@ class ProdutosController extends Controller
             $data['valor'] = $componentes->formatacaoMascaraDinheiroDecimal($data['valor']);
             $buscaRegistro = Produto::find($id);
             $buscaRegistro->update($data);
+
+            Toastr::success('Atualizado com sucesso');
             return redirect()->route('produto.index');
         }
         /* O depurador já entende que aqui é como se fosse 

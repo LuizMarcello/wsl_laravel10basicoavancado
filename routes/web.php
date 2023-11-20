@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProdutosController;
+use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\VendasController;
@@ -95,4 +96,20 @@ Route::prefix('vendas')->group(function () {
 
     /* http://localhost:8989/vendas/enviaComprovantePorEmail/id */
     Route::get('/enviaComprovantePorEmail/{id}', [VendasController::class, 'enviaComprovantePorEmail'])->name('enviaComprovantePorEmail.venda');
+});
+
+/* Prefixo "usuarios" */
+Route::prefix('usuario')->group(function () {
+    /* http://localhost:8989/usuarios */
+    Route::get('/', [UsuarioController::class, 'index'])->name('usuario.index');
+
+    /* ==Cadastrar create== */
+    /* get: Apresentar o formulário para cadastrar dados */
+    /* http://localhost:8989/usuario/cadastrarUsuario */
+    Route::get('/cadastrarUsuario', [UsuarioController::class, 'cadastrarUsuario'])->name('cadastrar.usuario');
+
+    Route::post('/cadastrarUsuario', [UsuarioController::class, 'cadastrarUsuario'])->name('cadastrar.usuario');
+    Route::get('/atualizarUsuario/{id}', [UsuarioController::class, 'atualizarUsuario'])->name('atualizar.usuario');
+    Route::put('/atualizarUsuario/{id}', [UsuarioController::class, 'atualizarUsuario'])->name('atualizar.usuario');
+    Route::delete('/delete', [UsuarioController::class, 'delete'])->name('usuario.delete');
 });

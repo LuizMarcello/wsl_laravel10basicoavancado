@@ -41,4 +41,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getUsuariosPesquisarIndex(string $search = '')
+    {
+        /* Como já estamos dentro do model "Produto", este "$this" por
+           si só, já representa este model. */
+        $produto = $this->where(function ($query) use ($search) {
+            /* Condicional, se "$search" existir, não for uma string
+               vazia, daí faz a consulta ao banco de dados. */
+            if ($search) {
+                $query->where('nome', $search);
+                /* O "like" quer dizer, parece com... */
+                $query->orWhere('nome', 'LIKE', "%{$search}%");
+            }
+        })->get();
+
+        return $produto;
+    }
 }
